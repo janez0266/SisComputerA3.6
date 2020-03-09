@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Acercade"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Acercade">
+
+    <TextView
+        android:id="@+id/info2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Bienvenidos"
+        android:textColor="#ff3388"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/ImgFoto"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@drawable/robot" />
+
+    <TextView
+        android:id="@+id/TxtCOMPANY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JCA..COMPUTER"
+        android:textColor="#ffff041b"
+        android:textSize="45sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/TxtAcercade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diseño y programación"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/TxtAcercade3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ing. Julio C. Añez "
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TxtAcercade5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="email"
+        android:text="aplicacionesjca@gmail.com"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TxtAcercade2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Visita mi Blog en WordPress"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/TxtAcercade4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:text="http://juliocesaranez.wordpress.com/"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+</LinearLayout>

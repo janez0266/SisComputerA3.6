@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_slideshow" />
+    </group>
+    <group android:id="@+id/group_menu">
+
+        <item
+            android:id="@+id/nav_clientes"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Clientes" />
+        <item
+            android:id="@+id/nav_reparaciones"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Reparaciones" />
+        <item
+            android:id="@+id/nav_inventario"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Inventario" />
+        <item
+            android:id="@+id/nav_proveedores"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Proveedores" />
+
+    </group>
+    <item android:title="Herramientas">
+        <menu>
+            <item
+                android:id="@+id/nav_basedatos"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Mantenimiento BD" />
+
+            <item
+                android:id="@+id/nav_estadisticas"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Estadisticas" />
+            <item
+                android:id="@+id/nav_docfallas"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Doc Fallas" />
+            <item
+                android:id="@+id/nav_acercade"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Acerca de" />
+
+
+
+        </menu>
+    </item>
+
+</menu>

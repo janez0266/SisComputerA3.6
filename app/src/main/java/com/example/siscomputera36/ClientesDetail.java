@@ -1,8 +1,12 @@
 package com.example.siscomputera36;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentUris;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -15,14 +19,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 public class ClientesDetail extends AppCompatActivity {
 
-    public static final int PICK_CONTACT_REQUEST = 1 ;
+    public static final int PICK_CONTACT_REQUEST = 99;
     private Uri contactUri;
     Button btnSave;
     Button btnClose;
@@ -31,22 +41,39 @@ public class ClientesDetail extends AppCompatActivity {
     EditText txtEmail;
     EditText txtNota;
     TextView txtId;
+    ImageView imageView3;
 
     int _Cliente_Id=0;
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(android.R.style.Theme_DeviceDefault_Light_Dialog);  //se salen los botones de abajo
+        //setTheme(android.R.style.ThemeOverlay_Material_Dialog);  //ventana muy angosta
+        //setTheme(android.R.style.Theme_Material_Dialog_Alert); //fondo gris oscuro. se salen los botones de abajo
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientes_detail);
+        setTitle(" ");
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        btnSave = (Button) findViewById(R.id.btnSms);
+                Intent intent = new Intent(ClientesDetail.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnSave = (Button) findViewById(R.id.btnSave);
         btnClose = (Button) findViewById(R.id.btnClose);
         txtNombre = (EditText) findViewById(R.id.txtNombre);
         txtTelefono = (EditText) findViewById(R.id.txtTelefono);
         txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtNota = (EditText) findViewById(R.id.txtNota);
         txtId = (TextView) findViewById(R.id.txtId);
+        imageView3 = findViewById(R.id.imageView);
 
 
 // para mostrar los datos que viene de clientesmain y editarlos
@@ -67,7 +94,7 @@ public class ClientesDetail extends AppCompatActivity {
                 txtEmail.setText(cursor.getString(cursor.getColumnIndex("email")));
                 txtNota.setText(cursor.getString(cursor.getColumnIndex("nota")));
                 //txtId.setText(cursor.getInt(cursor.getColumnIndex("key_id")));
-                txtId.setText(String.valueOf(cursor.getInt(cursor.getColumnIndex("key_id"))));
+                txtId.setText("Modificar Cliente: " + String.valueOf(cursor.getInt(cursor.getColumnIndex("key_id"))));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -111,6 +138,7 @@ public class ClientesDetail extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Cliente Actualizado", Toast.LENGTH_SHORT).show();
 
                     }
+                    fila.close();
                     db.close();
                     _Cliente_Id = 0;
 //                    limpiarCampos();
@@ -199,30 +227,57 @@ public class ClientesDetail extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
     */
-//todo **ojo** no funcionan contactos
+//todo **ojo** no funcionan contactos... El error esta al leer el nro telefonico y la imagen. el nombre lo lee bien
     public void initPickContacts(View v){
         Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(i, PICK_CONTACT_REQUEST);
     }
 
-    private void renderContact(Uri uri) {
-        txtNombre.setText(getName(uri));
-        txtTelefono.setText(getPhone(uri));
-//        contactPic.setImageBitmap(getPhoto(uri));
-    }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == RESULT_OK) {
                 contactUri = intent.getData();
+//                Toast.makeText(getApplicationContext(), "onactivityresult:-- " + contactUri, Toast.LENGTH_LONG).show();
+
                 renderContact(contactUri);
             }
         }
     }
 
+    private void renderContact(Uri uri) {
+        txtNombre.setText(getName(uri));
+//        txtTelefono.setText(getPhone(uri));
+//        imageView3.setImageBitmap(getPhoto(uri));
+    }
+
+    private String getName(Uri uri) {
+        String name = null;
+        String phone = null;
+        ContentResolver contentResolver = getContentResolver();
+
+        Cursor c = contentResolver.query(
+                uri,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME},
+                null,
+                null,
+                null);
+
+        if(c.moveToFirst()){
+//            name = c.getString(0);
+            name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+//            phone = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+        }
+        c.close();
+        return name;
+    }
     private String getPhone(Uri uri) {
         String id = null;
         String phone = null;
+        //se busca el id del contacto, para luego buscar en la tabla de los nros telefonicos (tablas separadas)
         Cursor contactCursor = getContentResolver().query(
                 uri,
                 new String[]{ContactsContract.Contacts._ID},
@@ -233,10 +288,16 @@ public class ClientesDetail extends AppCompatActivity {
             id = contactCursor.getString(0);
         }
         contactCursor.close();
+        Toast.makeText(getApplicationContext(), "Contact ID:-- " + id, Toast.LENGTH_LONG).show();
+//todo aqui esta el problema de los contactos
+        //con el id del contacto, se busca en la tabla telefonos, y se selecciona el nro mobile (type_mobile)
+
         String selectionArgs =
                 ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? AND " +
-                        ContactsContract.CommonDataKinds.Phone.TYPE+"= " +
+                        ContactsContract.CommonDataKinds.Phone.TYPE+" = " +
                         ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE;
+
+
         Cursor phoneCursor = getContentResolver().query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 new String[] { ContactsContract.CommonDataKinds.Phone.NUMBER },
@@ -244,27 +305,60 @@ public class ClientesDetail extends AppCompatActivity {
                 new String[] { id },
                 null
         );
+
+
         if (phoneCursor.moveToFirst()) {
             phone = phoneCursor.getString(0);
         }
         phoneCursor.close();
+
+
+
+
+//        phone = "123456789";
+
         return phone;
     }
 
-    private String getName(Uri uri) {
-        String name = null;
-        ContentResolver contentResolver = getContentResolver();
-        Cursor c = contentResolver.query(
-                uri,
-                new String[]{ContactsContract.Contacts.DISPLAY_NAME},
-                null,
-                null,
-                null);
 
-        if(c.moveToFirst()){
-            name = c.getString(0);
+    private Bitmap getPhoto(Uri uri) {
+        /*
+        Foto del contacto y su id
+         */
+        Bitmap photo = null;
+        String id = null;
+
+        /************* CONSULTA ************/
+        Cursor contactCursor = getContentResolver().query(
+                uri, new String[]{ContactsContract.Contacts._ID}, null, null, null);
+
+        if (contactCursor.moveToFirst()) {
+            id = contactCursor.getString(0);
         }
-        c.close();
-        return name;
+        contactCursor.close();
+
+        /*
+        Usar el método de clase openContactPhotoInputStream()
+         */
+        try {
+            InputStream input =
+                    ContactsContract.Contacts.openContactPhotoInputStream(
+                            getContentResolver(),
+                            ContentUris.withAppendedId(
+                                    ContactsContract.Contacts.CONTENT_URI,
+                                    Long.parseLong(id))
+                    );
+            if (input != null) {
+                /*
+                Dar formato tipo Bitmap a los bytes del BLOB
+                correspondiente a la foto
+                 */
+                photo = BitmapFactory.decodeStream(input);
+                input.close();
+            }
+
+        } catch (IOException iox) { /* Manejo de errores */ }
+
+        return photo;
     }
 }

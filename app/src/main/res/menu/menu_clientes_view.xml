@@ -3,36 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ClientesView">
-    <item android:id="@+id/add"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Agregar"
+<!--
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_add_circle_outline_black_24dp"
         android:orderInCategory="1"
-        app:showAsAction="ifRoom" />
-    <item android:id="@+id/search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="Buscar"
-        android:orderInCategory="2"
-        app:showAsAction="ifRoom" />
-    <item android:id="@+id/edit"
+        android:title="Agregar"
+        app:showAsAction="ifRoom" />  -->
+    <item
+        android:id="@+id/edit"
+        android:icon="@drawable/ic_mode_edit"
+        android:orderInCategory="1"
         android:title="Editar"
-        android:orderInCategory="3"
-        app:showAsAction="never" />
-    <item android:id="@+id/delete"
-        android:title="Eliminar"
-        android:orderInCategory="4"
-        app:showAsAction="never" />
-    <item android:id="@+id/repara"
-        android:title="Reparaciones"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-    <item android:id="@+id/llamar"
-        android:title="llamar"
-        android:orderInCategory="103"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/btnmore"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        android:orderInCategory="2"
+        android:title="Mas"
+        app:showAsAction="always">
+        <menu>
 
 
-    <item android:id="@+id/close"
-        android:title="Cerrar"
-        android:orderInCategory="110"
-        app:showAsAction="never" />
+            <item
+                android:id="@+id/search"
+                android:icon="@android:drawable/ic_menu_search"
+                android:orderInCategory="2"
+                android:title="Buscar"
+                app:showAsAction="ifRoom" />
+
+  <!--          <item
+                android:id="@+id/edit"
+                android:icon="@drawable/ic_mode_edit"
+                android:orderInCategory="3"
+                android:title="Editar"
+                app:showAsAction="never" /> -->
+            <item
+                android:id="@+id/delete"
+                android:icon="@drawable/ic_delete_forever"
+                android:orderInCategory="4"
+                android:title="Eliminar"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/repara"
+                android:icon="@drawable/ic_playlist_add_check_black_24dp"
+                android:orderInCategory="100"
+                android:title="Lista de Reparaciones"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/ingreso"
+                android:icon="@drawable/ic_build"
+                android:orderInCategory="100"
+                android:title="Ingreso de Equipos"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/llamar"
+                android:icon="@drawable/ic_phone_forwarded"
+                android:orderInCategory="103"
+                android:title="llamar"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/sms"
+                android:icon="@drawable/ic_sms_black_24dp"
+                android:orderInCategory="103"
+                android:title="Enviar SMS Deposito"
+                app:showAsAction="never" />
+
+
+            <group android:id="@+id/grp1">
+
+                <item
+                    android:id="@+id/close"
+                    android:icon="@drawable/ic_cancel"
+                    android:orderInCategory="110"
+                    android:title="Cerrar" />
+            </group>
+
+        </menu>
+    </item>
 </menu>

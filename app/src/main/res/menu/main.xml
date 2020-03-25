@@ -2,12 +2,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-    <item android:id="@+id/close"
-        android:title="Cerrar"
+        android:id="@+id/btnmore"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        android:orderInCategory="2"
+        android:title="Mas"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_settings"
+                android:icon="@drawable/ic_playlist_add_check_black_24dp"
+                android:orderInCategory="100"
+                android:title="@string/action_settings"
+                app:showAsAction="never" />
+
+    <item android:id="@+id/del_cli"
+        android:title="Borrar BD Clientes"
+        android:icon="@drawable/ic_delete_forever"
         android:orderInCategory="110"
         app:showAsAction="never" />
+    <item android:id="@+id/del_repara"
+        android:title="Borrar BD Reparaciones"
+        android:orderInCategory="110"
+        android:icon="@drawable/ic_delete_forever"
+        app:showAsAction="never" />
+            <group android:id="@+id/grp1">
+
+                <item
+                    android:id="@+id/close"
+                    android:icon="@drawable/ic_cancel"
+                    android:orderInCategory="110"
+                    android:title="Salir" />
+            </group>
+
+        </menu>
+    </item>
 </menu>

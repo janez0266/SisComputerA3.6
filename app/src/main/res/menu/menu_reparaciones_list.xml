@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ReparacionesList">
+
+    <item
+        android:id="@+id/btnmore"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        android:orderInCategory="2"
+        android:title="Mas"
+        app:showAsAction="always">
+        <menu>
+
+            <item
+                android:id="@+id/search"
+                android:icon="@android:drawable/ic_menu_search"
+                android:orderInCategory="2"
+                android:title="Buscar" />
+            <item
+                android:id="@+id/todos"
+                android:icon="@drawable/ic_playlist_add_check_black_24dp"
+
+                android:orderInCategory="3"
+                android:title="Todos" />
+            <item
+                android:id="@+id/entaller"
+                android:icon="@drawable/ic_account_balance"
+                android:orderInCategory="4"
+                android:title="En Taller" />
+            <item
+                android:id="@+id/entregados"
+                android:icon="@drawable/ic_file_upload"
+                android:orderInCategory="100"
+                android:title="Entregados" />
+            <item
+                android:id="@+id/reparados"
+                android:icon="@drawable/ic_build"
+                android:orderInCategory="103"
+                android:title="Reparados" />
+            <item
+                android:id="@+id/por_fecha"
+                android:icon="@drawable/ic_today"
+                android:orderInCategory="104"
+                android:title="Ordenar por fecha" />
+            <group android:id="@+id/grp1">
+                <item
+                    android:id="@+id/nr_registros"
+                    android:icon="@drawable/ic_functions"
+                    android:orderInCategory="105"
+                    android:title="Cantidad Registros" />
+                <item
+                    android:id="@+id/refresh"
+                    android:icon="@drawable/ic_refresh"
+                    android:orderInCategory="110"
+                    android:title="Recargar Listado" />
+
+            </group>
+
+
+            <group android:id="@+id/grp2">
+                <item
+                    android:id="@+id/close"
+                    android:icon="@drawable/ic_cancel"
+                    android:orderInCategory="130"
+                    android:title="Cerrar" />
+            </group>
+
+
+        </menu>
+    </item>
+
+
+
+
+</menu>

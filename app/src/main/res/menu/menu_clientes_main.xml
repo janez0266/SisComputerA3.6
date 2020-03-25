@@ -3,17 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainClientes">
-    <item android:id="@+id/add"
-        android:title="Agregar"
-        android:icon="@android:drawable/ic_menu_add"
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_add_circle_outline_black_24dp"
         android:orderInCategory="1"
+        android:title="Agregar"
         app:showAsAction="ifRoom" />
-    <item android:id="@+id/nr_registros"
-        android:title="Nro Registros"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-    <item android:id="@+id/close"
-        android:title="Cerrar"
-        android:orderInCategory="110"
-        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/btnmore"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        android:orderInCategory="2"
+        android:title="Mas"
+        app:showAsAction="always">
+
+    <menu>
+
+
+        <item
+            android:id="@+id/nr_registros"
+            android:icon="@drawable/ic_functions"
+            android:orderInCategory="100"
+            android:title="Cantidad Registros" />
+        <item
+            android:id="@+id/close"
+            android:icon="@drawable/ic_cancel"
+            android:orderInCategory="110"
+            android:title="Cerrar" />
+        </menu>
+    </item>
 </menu>

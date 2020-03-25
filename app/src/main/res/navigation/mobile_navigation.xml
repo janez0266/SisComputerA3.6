@@ -51,9 +51,10 @@
         android:name="com.example.siscomputera36.Acercade"
         android:label="activity_acercade"
         tools:layout="@layout/activity_acercade" />
+
     <activity
         android:id="@+id/nav_reparaciones"
-        android:name="com.example.siscomputera36.MainReparaciones"
-        android:label="activity_main_reparaciones"
-        tools:layout="@layout/activity_main_reparaciones" />
+        android:name="com.example.siscomputera36.ReparacionesList"
+        android:label="repraciones_view"
+        tools:layout="@layout/reparaciones_list" />
 </navigation>

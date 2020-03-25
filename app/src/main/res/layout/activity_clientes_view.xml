@@ -1,156 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ClientesView"
-    android:background="@drawable/fondoazul">
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/rectangle"
+        android:layout_height="103dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="220dp"
+            android:layout_height="113dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/robot" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_id"
+                    android:layout_width="61dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="ID :" />
+
+                <TextView
+                    android:id="@+id/txtId"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:textColor="#5E0808"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Nombre:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtNombre"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:textColor="#ff320505"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="?android:attr/listDivider" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Nombre"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="30dp"
-        />
-    <TextView
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+
+            android:text="Telefono"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txtTelefono"
+            android:layout_width="293dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:autoLink="phone"
+            android:clickable="true"
+            android:ems="10"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:text="Email"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="339dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:autoLink="email"
+            android:clickable="true"
+            android:ems="10"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:text="Nota"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txtNota"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textNoSuggestions|textMultiLine"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+    <!--
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Telefono"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
-    <TextView
-        android:layout_width="wrap_content"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal"
+        app:borderWidth="0dp" />
+-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Email"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="29dp" />
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/btnRepara"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="77dp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle"
+            android:drawableTop="@drawable/ic_laptop"
+            android:text="Ingreso de Equipos" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Nota"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="ID: "
-        android:id="@+id/textView6"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/txtNombre"
-        android:layout_marginLeft="20dp"
-        android:layout_alignEnd="@+id/btnClose"
-        android:layout_above="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_below="@+id/txtId"
-        android:textSize="20dp" />
+        <Button
+            android:id="@+id/btn_ver_lista"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle"
+            android:drawableTop="@drawable/ic_build"
+            android:text="Ver Lista de  Reparaciones" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/txtTelefono"
-        android:layout_marginLeft="20dp"
-        android:layout_above="@+id/textView3"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_alignRight="@+id/txtNombre"
-        android:layout_alignEnd="@+id/txtNombre"
-        android:autoLink="phone"
-        android:textSize="20dp"
-        android:clickable="true"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/txtEmail"
-        android:layout_marginLeft="20dp"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignEnd="@+id/txtNombre"
-        android:layout_toEndOf="@+id/textView3"
-        android:autoLink="email"
-        android:clickable="true"
-        android:textSize="20dp" />
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/txtNota"
-        android:layout_marginLeft="20dp"
-        android:inputType="textNoSuggestions|textMultiLine"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignEnd="@+id/txtEmail"
-        android:layout_toEndOf="@+id/textView3"
-        android:textSize="20dp" />
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/txtId"
-        android:textSize="20dp"
-        android:textColor="#ff320505"
-        android:layout_marginLeft="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView6"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClose"
+            android:layout_width="174dp"
+            android:layout_height="59dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rectangle"
+            android:drawableTop="@drawable/ic_cancel"
+            android:text="Cerrar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_alignParentEnd="true"
+            app:layout_anchor="@id/app_bar"
+            android:layout_gravity="bottom|end"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/ic_home"
+            app:maxImageSize="56dp" />
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SMS Deposito"
-        android:id="@+id/btnSms"
-        android:onClick="sendMessage"
-        android:layout_above="@+id/btnRepara"
-        android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Close"
-        android:id="@+id/btnClose"
-
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reparaciones"
-        android:id="@+id/btnRepara"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+
+
+</LinearLayout>

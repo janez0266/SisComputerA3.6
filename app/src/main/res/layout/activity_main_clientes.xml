@@ -17,21 +17,20 @@
 
         <ImageView
             android:id="@+id/banner"
-            android:layout_width="395dp"
+            android:layout_width="wrap_content"
             android:layout_height="85dp"
             android:src="@drawable/banner_arriba" />
 
 
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="40dp"
-        android:text="Lista de Clientes Registrados"
-        android:textAlignment="center"
-        android:textColor="@color/design_default_color_error"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+
+            android:text="Lista de Clientes Registrados"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="30dp"
+            android:textStyle="bold" />
     </FrameLayout>
 
     <FrameLayout

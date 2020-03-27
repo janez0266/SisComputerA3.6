@@ -22,19 +22,19 @@
 
         <item
             android:id="@+id/nav_clientes"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_person"
             android:title="Clientes" />
         <item
             android:id="@+id/nav_reparaciones"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_build"
             android:title="Reparaciones" />
         <item
             android:id="@+id/nav_inventario"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_playlist_add_check_black_24dp"
             android:title="Inventario" />
         <item
             android:id="@+id/nav_proveedores"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_contact_phone"
             android:title="Proveedores" />
 
     </group>
@@ -42,20 +42,20 @@
         <menu>
             <item
                 android:id="@+id/nav_basedatos"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_voicemail"
                 android:title="Mantenimiento BD" />
 
             <item
                 android:id="@+id/nav_estadisticas"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_functions"
                 android:title="Estadisticas" />
             <item
                 android:id="@+id/nav_docfallas"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_content_paste"
                 android:title="Doc Fallas" />
             <item
                 android:id="@+id/nav_acercade"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_contact_mail"
                 android:title="Acerca de" />
 
 

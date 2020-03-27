@@ -33,17 +33,22 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class TomarFoto extends AppCompatActivity implements View.OnClickListener {
     private ImageView mPhotoImageView;
+    private ImageView imageCamara;
+    private ImageView help;
     private Button btn_tomarFoto;
     public static final int REQUEST_CODE_TAKE_PHOTO = 0 /*1*/;
     public Uri photoURI;
@@ -67,44 +72,48 @@ public class TomarFoto extends AppCompatActivity implements View.OnClickListener
         _id = b.getInt("rep_id");
         // Views
         mPhotoImageView = (ImageView) findViewById(R.id.imgPhotoUser);
+        imageCamara = findViewById(R.id.imageCamara);
+        help = findViewById(R.id.help);
 
         btn_tomarFoto = findViewById(R.id.btn_tomarFoto);
         fotos_list = findViewById(R.id.fotos_list);
 
 //        textView =  findViewById(R.id.editText);
         editText_nota = findViewById(R.id.editText_nota);
+
         txt_cliente = findViewById(R.id.text_cliente);
         txt_cliente.setText(cliente);
         // Listeners
 //        mPhotoImageView.setOnClickListener(TomarFoto.this);
         btn_tomarFoto.setOnClickListener(TomarFoto.this);
+        help.setOnClickListener(TomarFoto.this);
         mostrarLista();
     }
 
     @Override
     public void onClick(View v) {
         if (v == btn_tomarFoto) {
-            advertenciaCamara();
+            tomarfoto();
+        }
+        if (v == help){
+            AlertDialog alertDialog = new AlertDialog.Builder(TomarFoto.this)
+                    .setTitle("FileExplorer de Fotos " + _id)
+                    .setMessage("1.- para tomar una foto, coloque la camara en posicion Horizontal.\n" +
+                            "2.- Si quiere colocar una nota, escribala antes de tomar la foto \n" +
+                            "3.- Para ver las fotos del listado, presione sobre ellas.\n" +
+                            "4.- para eliminar una foto del listado, deje presionado el item hasta que salga el dialogo de eliminar")
+                    .setIcon(R.drawable.ic_menu_camera)
+
+                    .setNegativeButton("Ok", new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //no hacer nada
+                        }
+                    })
+                    .create();
+            alertDialog.show();
         }
     }
 
-    public void advertenciaCamara(){
-        AlertDialog advertencia = new AlertDialog.Builder(this)
-                .setTitle("* A D V E R TE N C I A *")//Título del diálogo
-                .setMessage("se recomienda bajar la resolucion de la CAMARA para que las fotos no recarguen el sistema. " +
-                        "Entre en la configuracion y coloque la resolucion al minimo....\n" +
-                        "Tambien s recomienda que tome las fotos en modo horizontal...")//Mensaje del diálogo
-                .setIcon(R.drawable.ic_warning)
-                .setPositiveButton("Continuar", new AlertDialog.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        // Aquí irá lo que se desee hacer cuando hagamos click en el boton Si
-                        tomarfoto();
-                    }
-                })
-                .create();
-        advertencia.show();
-    }
     public void tomarfoto(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -159,18 +168,12 @@ public class TomarFoto extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private File createImageFile() throws IOException {  //todo modificar aqui las rutas y nombre del archivo
+    private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss").format(new Date());
         // Create an image file name
-        String imageFileName = cliente.trim().replaceAll(" ", "") + "_" + timeStamp + ".jpg";    //todo se puede reemplazar el JPEG_ por el nombre de usuario
-//      coloca el almacenamiento en lugar privado de la app, para no ser accesado por la galeria
-        ///storage/emulated/0/Android/data/com.example.camara/files/Pictures
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES );
-//        File storageDir = new File (getExternalFilesDir(Environment.DIRECTORY_PICTURES ), "fotosSistema_borrar");
-//        File storageDir = new File(Environment.getExternalStorageDirectory(), "/Pictures/fotosSistema/");
+        String imageFileName = cliente.trim().replaceAll(" ", "") + "_" + timeStamp + ".jpg";
+        File storageDir = new File (getExternalFilesDir(Environment.DIRECTORY_PICTURES ), "reparaciones");
         storageDir.mkdirs();
-
-        //crea el archivo bien definido, con 0 bytes
         File image;
         image = new File(storageDir, imageFileName);
 //        image.createNewFile();
@@ -188,35 +191,22 @@ public class TomarFoto extends AppCompatActivity implements View.OnClickListener
 
                 bitmapImagen = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
                 mPhotoImageView.setImageBitmap(bitmapImagen);
-                //aqui se reduce la imagen para mostrarla en un imageview
-//                Bitmap imageScaled = Bitmap.createScaledBitmap(bitmapImagen, 800, 600, false);
-//                mPhotoImageView.setImageBitmap(imageScaled);
 
-                // //todo siiiiii...... ruta real de la imagen tomada
-                String selecteadImage = getRealPathFromURI(this, photoURI);
+                String selecteadImage = getRealPathFromURI(this, photoURI); //RUTA ORIGINAL DE LA IMAGEN TOMADA
                 //ahora se copia al directorio destino con elnombre escogido "DESTINO". este se debe pasar a la BD
-                File fuente = new File(selecteadImage);
-                File destino = new File(String.valueOf(createImageFile()));
-                fuente.renameTo(destino);
-
-
-                // todo prueba para reducir el tamañode la imagen... No lo usare por ahora
-                //funciona bien, pero cambia la orientacion de la imagen obtenida
-/*
-                File dirImages = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                File myPath = new File(dirImages, "prueba" + ".png");
-
+                File fuente = new File(selecteadImage); //este el el archivo original sin comprimir
+                File destino = new File(String.valueOf(createImageFile()));//este es el nombre del archivo que sera el destino
                 FileOutputStream fos = null;
                 try{
-                    fos = new FileOutputStream(myPath);
-                    bitmapImagen.compress(Bitmap.CompressFormat.JPEG, 10, fos);
-                    fos.flush();
+                    fos = new FileOutputStream(destino); //archivo destino
+                    bitmapImagen.compress(Bitmap.CompressFormat.JPEG, 20, fos);//comprime la imagen real y la pasa a fos
+                    fos.flush();// se graba en la sd
                 }catch (FileNotFoundException ex){
                     ex.printStackTrace();
                 }catch (IOException ex){
                     ex.printStackTrace();
                 }
-*/
+                fuente.delete();//borramos la foto original
 
                 //GUARDAMOS LA RUTA DE LA FOTO (DESTINO) EN LA TABLA, JUNTO CON EL ID DE LA REPARACION
                 DBHelper dbHelper = new DBHelper(getApplicationContext());
@@ -280,19 +270,13 @@ public class TomarFoto extends AppCompatActivity implements View.OnClickListener
         fotos_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
-            //int pos = position + 1;
-            String foto = datos_fotos.get(position).split(" ")[3];
-                //tomar la foto de su ubicacion original y ponerla en el imageview pequeño
+                String foto = datos_fotos.get(position).split(" ")[3];
+                //tomar la foto de su ubicacion original y ponerla en el imageview
                 File imgFile = new File(String.valueOf(foto));
                 if(imgFile.exists()) {
                     Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                    //rotar la imagen para que se vea bien en elimageview
-
-
-                   //mostrar la imagen arreglada
                     mPhotoImageView.setImageBitmap(myBitmap);
-                   // mPhotoImageView.setImageBitmap(rotated);
-                    //myBitmap.recycle();
+
                 }
 
 //            Toast.makeText(getApplicationContext(), "foto:  " + foto, Toast.LENGTH_SHORT).show();

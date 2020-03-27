@@ -45,13 +45,13 @@
 
                 <TextView
                     android:id="@+id/txt_nombre"
-                    android:textColor="#5E0202"
-                    android:layout_width="290dp"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:textSize="26dp"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="Nombre" />
+                    android:text="Nombre"
+                    android:textColor="#5E0202"
+                    android:textSize="24dp" />
 
 
 
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:hint="Tipo/Marca/Modelo"/>
         </LinearLayout>
 
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:hint="TM/Procesador/memoria/Hdd/T-Video"/>
         </LinearLayout>
 
@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:hint="Cargador/Cables/Monitor/Teclado/Mouse"/>
         </LinearLayout>
 
@@ -190,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:hint="Fallas segun el Cliente"/>
         </LinearLayout>
 
@@ -205,17 +205,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="Diagnostico:"
-                android:hint="Evaluacion del Tecnico/Recomendaciones"/>
+                android:hint="Evaluacion del Tecnico/Recomendaciones"
+                android:text="Diagnostico:" />
 
             <EditText
                 android:id="@+id/ed_diag"
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textMultiLine"
-                android:hint="Evaluacion del Tecnico/Recomendaciones"/>
+                android:hint="Evaluacion del Tecnico/Recomendaciones"
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -235,12 +235,11 @@
             <EditText
                 android:id="@+id/ed_informe"
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textMultiLine"
                 android:hint="Reparacion ejecutada"
-                />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -258,7 +257,7 @@
             <EditText
                 android:id="@+id/ed_notas"
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="start|top"

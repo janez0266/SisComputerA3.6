@@ -11,26 +11,41 @@
             <item
                 android:id="@+id/action_settings"
                 android:icon="@drawable/ic_playlist_add_check_black_24dp"
-                android:orderInCategory="100"
+                android:orderInCategory="10"
                 android:title="@string/action_settings"
                 app:showAsAction="never" />
 
-    <item android:id="@+id/del_cli"
-        android:title="Borrar BD Clientes"
-        android:icon="@drawable/ic_delete_forever"
-        android:orderInCategory="110"
-        app:showAsAction="never" />
-    <item android:id="@+id/del_repara"
-        android:title="Borrar BD Reparaciones"
-        android:orderInCategory="110"
-        android:icon="@drawable/ic_delete_forever"
-        app:showAsAction="never" />
-            <group android:id="@+id/grp1">
+            <item android:id="@+id/del_cli"
+                android:title="Borrar BD Clientes"
+                android:icon="@drawable/ic_delete_forever"
+                android:orderInCategory="11"
+                app:showAsAction="never" />
+            <item android:id="@+id/del_repara"
+                android:title="Borrar BD Reparaciones"
+                android:orderInCategory="12"
+                android:icon="@drawable/ic_delete_forever"
+                app:showAsAction="never" />
+            <item android:id="@+id/del_fotos"
+                android:title="Borrar BD Fotos"
+                android:orderInCategory="13"
+                android:icon="@drawable/ic_delete_forever"
+                app:showAsAction="never" />
 
+            <group android:id="@+id/grp1">
+                <item
+                    android:id="@+id/fileExplorer"
+                    android:icon="@drawable/ic_folder"
+                    android:orderInCategory="19"
+                    android:title="File Explorer" />
+                <item
+                    android:id="@+id/ayuda"
+                    android:icon="@drawable/ic_live_help"
+                    android:orderInCategory="20"
+                    android:title="Ayuda" />
                 <item
                     android:id="@+id/close"
                     android:icon="@drawable/ic_cancel"
-                    android:orderInCategory="110"
+                    android:orderInCategory="20"
                     android:title="Salir" />
             </group>
 

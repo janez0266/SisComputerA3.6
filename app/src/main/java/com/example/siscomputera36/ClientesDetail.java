@@ -48,24 +48,14 @@ public class ClientesDetail extends AppCompatActivity {
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(android.R.style.Theme_DeviceDefault_Light_Dialog);  //se salen los botones de abajo
+        //setTheme(android.R.style.Theme_DeviceDefault_Light_Dialog);  //se salen los botones de abajo
         //setTheme(android.R.style.ThemeOverlay_Material_Dialog);  //ventana muy angosta
         //setTheme(android.R.style.Theme_Material_Dialog_Alert); //fondo gris oscuro. se salen los botones de abajo
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientes_detail);
         setTitle(" ");
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent = new Intent(ClientesDetail.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
-        });
         btnSave = (Button) findViewById(R.id.btnSave);
         btnClose = (Button) findViewById(R.id.btnClose);
         txtNombre = (EditText) findViewById(R.id.txtNombre);
@@ -232,9 +222,6 @@ public class ClientesDetail extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(i, PICK_CONTACT_REQUEST);
     }
-
-
-
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == PICK_CONTACT_REQUEST) {
@@ -246,30 +233,23 @@ public class ClientesDetail extends AppCompatActivity {
             }
         }
     }
-
     private void renderContact(Uri uri) {
         txtNombre.setText(getName(uri));
 //        txtTelefono.setText(getPhone(uri));
 //        imageView3.setImageBitmap(getPhoto(uri));
     }
-
     private String getName(Uri uri) {
         String name = null;
         String phone = null;
         ContentResolver contentResolver = getContentResolver();
-
         Cursor c = contentResolver.query(
                 uri,
                 new String[]{ContactsContract.Contacts.DISPLAY_NAME},
                 null,
                 null,
                 null);
-
         if(c.moveToFirst()){
-//            name = c.getString(0);
             name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-//            phone = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
         }
         c.close();
         return name;

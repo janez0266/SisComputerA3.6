@@ -9,12 +9,12 @@ package com.example.siscomputera36;
 // agregado al github el 9/3/2020
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -37,6 +37,12 @@ import android.provider.Settings.Secure;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -71,31 +77,23 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FloatingActionButton help = findViewById(R.id.help);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ayuda();
+            }
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-               messageFloat();
-/*
-                Snackbar.make(view, "ID del dispositivo:" + deviceId, Snackbar.LENGTH_LONG)
-                        //.setActionTextColor(Color.CYAN)
-                        //.setActionTextColor(getResources().getColor(R.color.snackbar_action))
-                        .setAction("Acción", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //aqui acciones a ejecutar
-                                Toast.makeText(getApplicationContext(),
-                                        "** clave generada ** " + myClave, Toast.LENGTH_LONG).show();
-                                Log.i("Snackbar", "Pulsada acción snackbar!"); //envia un mensaje a la salida RUN de Android Studio
-                            }
-                        })
-                        .show();
- */
-
+               messageFloat(); //enviar correo
             }
         });
-      DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    public void messageFloat(){
+    public void messageFloat(){ //enviar correo
 
         LayoutInflater inflater = getLayoutInflater();
 
@@ -218,9 +216,22 @@ public class MainActivity extends AppCompatActivity {
                             db.execSQL("DROP TABLE IF EXISTS fotos");
                             db.execSQL(DBHelper.CREATE_TABLE_FOTOS);
                             db.close();
-
+                            //borrar las fotos del directorio
+                            File storageDir = new File (getExternalFilesDir(Environment.DIRECTORY_PICTURES ), "reparaciones");
+                            //comprueba si es directorio.
+                            if (storageDir.isDirectory())
+                            {
+                                //obtiene un listado de los archivos contenidos en el directorio.
+                                String[] _fotos = storageDir.list();
+                                //Elimina los archivos contenidos.
+                                for (int i = 0; i < _fotos.length; i++)
+                                {
+                                    new File(storageDir, _fotos[i]).delete();
+                                }
+                            }
                             Toast.makeText(getApplicationContext(),
-                                    "Registros de las tablas CLIENTES y REPARACIONES Eliminado", Toast.LENGTH_LONG).show();
+                                    "Registros de las tablas CLIENTES, REPARACIONES y FOTOS " +
+                                            "fueron eliminados...", Toast.LENGTH_LONG).show();
                         }
                     })
                     .setNegativeButton("no", new AlertDialog.OnClickListener() {
@@ -232,12 +243,85 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.show();
          return true;
         }
+        if (id == R.id.del_fotos){
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("* ADVERTENCIA * Eliminar tabla FOTOS")
+                    .setMessage("La eliminacion de la tabla FOTOS tambien eliminarrá las fotos " +
+                            "del almacenamiento interno. \n \nEsta seguro de Eliminar las Fotos?")
+                    .setIcon(R.drawable.ic_warning)
+                    .setPositiveButton("si", new AlertDialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            DBHelper dbHelper = new DBHelper(MainActivity.this);
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                            db.execSQL("DROP TABLE IF EXISTS fotos");
+                            db.execSQL(DBHelper.CREATE_TABLE_FOTOS);
+                            db.close();
+                            //borrar las fotos del directorio
+                            File storageDir = new File (getExternalFilesDir(Environment.DIRECTORY_PICTURES ), "reparaciones");
+                            //comprueba si es directorio.
+                            if (storageDir.isDirectory())
+                            {
+                                //obtiene un listado de los archivos contenidos en el directorio.
+                                String[] _fotos = storageDir.list();
+                                //Elimina los archivos contenidos.
+                                for (int i = 0; i < _fotos.length; i++)
+                                {
+                                    new File(storageDir, _fotos[i]).delete();
+                                }
+                            }
+                            Toast.makeText(getApplicationContext(),
+                                    "Todas las Fotos y sus registros en la Tabla, fueron eliminados con exito...", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .setNegativeButton("no", new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //no hacer nada
+                        }
+                    })
+                    .create();
+            alertDialog.show();
+        }
+        if (id == R.id.ayuda){
+            ayuda();
+
+        }
+        if (id == R.id.fileExplorer){
+            Intent intent = new Intent(this, FileExplorer.class); // donde NuevaPantalla.class es la pantalla a abrir
+            ////Iniciar actividad
+            startActivity(intent);
+        }
         if (id == R.id.action_settings){
-            //nada
+
         }
         return super.onOptionsItemSelected(item);
     }
+    public void ayuda(){
+        InputStream archivo = getResources().openRawResource(R.raw.ayuda_general); // se usa el archivo/res/raw/ayuda_general.txt
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(archivo));
+        StringBuilder stringBuilder = new StringBuilder();
+        String linea = null;
+        while(true){
+            try {
+                if (!((linea =bufferedReader.readLine())!= null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stringBuilder.append(linea).append("\n");
+        }
 
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("AYUDA GENERAL ")
+                .setMessage(stringBuilder)
+                .setIcon(R.drawable.ic_live_help)
+                .setNegativeButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //no hacer nada
+                    }
+                })
+                .create();
+        alertDialog.show();
+    }
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

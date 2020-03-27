@@ -1,0 +1,8 @@
+Esta es la guia para comenzar a utilizar este programa.
+1.- CLIentes:
+    -. Si es la primera vez que inicia el programa, aparecera un listado en blanco. Luego presione sobleel simbolo "+" ubicado abajo del listado. En la ventana que sigue, colocara por lo menos los datos basicos: Nombre y Telefono. luego de grabar, se devolvera al listado anterior y observara el cliente agregado. Al presionar sobre él, podra modificar, agregar un nuevo registro de reparacion, o utilizar las opciones que se presentan en el menu..
+    .- Si quiere agregar una reparacion, presione el cliente del listado, y en la ventana que aparece con los datos del cliente debera presionar sobre el boton "Agregar Reoaracion". Luego en la nueva pantalla podra agregar los datos del equipo recibido y se pueden agregar registros de fotografias tomadas directamente de la camara..
+    .- Cuando este en los detalles del cliente, podra ver el listado de equipos ingresados, presionando "Ver Lista de Equipos". Al presionar sobre ellos podra ver y editar los datos del equipo seleccionado.
+
+2.- Reparaciones:
+    -. Aqui se mostrara una lista de los equipos que estan registrados. Podra usar las opciones del menu para ordenar el listado. Al hacer click sobre ellos, podra ver los detalles de cada equipo, el estatus del mismo, etc. Tambien podra ver las fotos relacionadas, tomar nuevas y borrar las actuales..

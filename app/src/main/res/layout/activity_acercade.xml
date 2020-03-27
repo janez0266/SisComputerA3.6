@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="JCA..COMPUTER"
         android:textColor="#ffff041b"
-        android:textSize="45sp"
+        android:textSize="40sp"
         android:typeface="sans" />
 
     <TextView
